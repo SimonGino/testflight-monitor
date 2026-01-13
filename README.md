@@ -72,7 +72,7 @@ version: "3.8"
 
 services:
   tf-monitor:
-    build: .
+    image: simongino/tf-monitor:latest
     container_name: tf-monitor
     restart: unless-stopped
     ports:
