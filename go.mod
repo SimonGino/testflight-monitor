@@ -1,6 +1,6 @@
 module tf-monitor
 
-go 1.25.5
+go 1.21
 
 require (
 	github.com/PuerkitoBio/goquery v1.11.0 // indirect
