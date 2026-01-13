@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  tf-monitor:
+    build: .
+    container_name: tf-monitor
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - TZ=Asia/Shanghai
+      - PROXY_ENABLED=false
+      - PROXY_URL=
