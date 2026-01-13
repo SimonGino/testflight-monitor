@@ -92,9 +92,9 @@ const handleUpdateTelegram = async (config: TelegramConfig) => {
   }
 }
 
-const handleTestTelegram = async () => {
+const handleTestTelegram = async (config: { botToken: string; chatId: string }) => {
   try {
-    await api.testTelegram()
+    await api.testTelegram(config)
     alert(t.value.settings.testSuccess)
   } catch (err) {
     alert(t.value.settings.testFailed)

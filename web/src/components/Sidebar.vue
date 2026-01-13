@@ -12,7 +12,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'add-monitor', data: { urls: string; interval: number; duration: number; notifyMode: string; autoStart: boolean }): void
   (e: 'update-telegram', config: TelegramConfig): void
-  (e: 'test-telegram'): void
+  (e: 'test-telegram', config: { botToken: string; chatId: string }): void
 }>()
 
 const urls = ref('')
@@ -147,7 +147,7 @@ const saveTelegram = () => {
         </div>
         <div class="telegram-actions">
           <button class="secondary-btn" @click="saveTelegram">{{ t.sidebar.save }}</button>
-          <button class="text-btn" @click="$emit('test-telegram')">{{ t.sidebar.testSend }}</button>
+          <button class="text-btn" @click="$emit('test-telegram', { botToken: localTelegram.botToken, chatId: localTelegram.chatId })">{{ t.sidebar.testSend }}</button>
         </div>
       </div>
     </div>

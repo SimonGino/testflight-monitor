@@ -39,8 +39,8 @@ export const updateTelegramConfig = async (config: TelegramConfig): Promise<Tele
   return response.data
 }
 
-export const testTelegram = async (): Promise<void> => {
-  await api.post('/telegram/test')
+export const testTelegram = async (config: { botToken: string; chatId: string }): Promise<void> => {
+  await api.post('/telegram/test', config)
 }
 
 export const getStatus = async (): Promise<StatusResponse> => {

@@ -307,13 +307,17 @@ func (h *Handler) UpdateTelegramConfig(c *gin.Context) {
 }
 
 func (h *Handler) TestTelegram(c *gin.Context) {
-	var cfg model.TelegramConfig
-	if err := repository.GetDB().First(&cfg).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "telegram not configured"})
+	var req struct {
+		BotToken string `json:"botToken"`
+		ChatID   string `json:"chatId"`
+	}
+
+	if err := c.ShouldBindJSON(&req); err != nil || req.BotToken == "" || req.ChatID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "botToken and chatId required"})
 		return
 	}
 
-	notifier := notify.NewTelegramNotifier(cfg.BotToken, cfg.ChatID, h.proxyURL)
+	notifier := notify.NewTelegramNotifier(req.BotToken, req.ChatID, h.proxyURL)
 	if err := notifier.Send("TestFlight Monitor", "🎉 测试消息发送成功！"); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

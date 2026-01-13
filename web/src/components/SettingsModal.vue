@@ -13,7 +13,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'close'): void
   (e: 'update-telegram', config: TelegramConfig): void
-  (e: 'test-telegram'): void
+  (e: 'test-telegram', config: { botToken: string; chatId: string }): void
   (e: 'update-locale', locale: Locale): void
   (e: 'update-proxy', config: { enabled: boolean; url: string }): void
 }>()
@@ -104,7 +104,7 @@ const handleOverlayClick = (e: MouseEvent) => {
           </div>
           <div class="button-row">
             <button class="secondary-btn" @click="saveTelegram">{{ t.sidebar.save }}</button>
-            <button class="text-btn" @click="$emit('test-telegram')">{{ t.sidebar.testSend }}</button>
+            <button class="text-btn" @click="$emit('test-telegram', { botToken: localTelegram.botToken, chatId: localTelegram.chatId })">{{ t.sidebar.testSend }}</button>
           </div>
         </section>
 
