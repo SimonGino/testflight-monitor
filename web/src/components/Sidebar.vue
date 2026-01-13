@@ -27,7 +27,7 @@ const durationOptions = [
   { label: '8h', value: 8 },
   { label: '12h', value: 12 },
   { label: '24h', value: 24 },
-  { label: '∞', value: 0 },
+  { label: '∞', value: -1 },
 ]
 
 const localTelegram = reactive<TelegramConfig>({
@@ -66,7 +66,7 @@ const handleAdd = () => {
   emit('add-monitor', {
     urls: urls.value.trim(),
     interval: interval.value,
-    duration: duration.value,
+    duration: duration.value === -1 ? 0 : duration.value,
     notifyMode: notifyMode.value,
     autoStart: autoStart.value,
   })
